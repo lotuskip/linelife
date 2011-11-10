@@ -1,0 +1,103 @@
+<html>
+<head>
+<title>Linelife</title>
+<style type="text/css">
+body { color:gray; background-color:black; text-align:justify }
+</style>
+</head>
+<body>
+<h2>Linelife</h2>
+
+<p><strong>Contents</strong>
+<ul>
+<li><a href="#intro">Introduction</a></li>
+<li><a href="#rules">Rules</a></li>
+<li><a href="#program">The <em>linelife</em> program</a></li>
+<li><a href="#trivia">Trivia</a></li>
+</ul></p>
+
+
+<h3 id="intro">Introduction</h3>
+<p><em>Linelife</em> is &quot;Conway's game of Life in one dimension&quot;. Instead of a grid of cells,
+one has an infinite line of cells, all with two possible values, alive or dead &mdash; a picture probably
+reminicient to many of a Turing machine. Indeed, a <em>population</em> in
+Linelife can be understood as a binary sequence. Linelife is not an elementary
+cellural automaton, however; its rules are more complicated.</p>
+
+<p><em>linelife</em> is a simple CLI program that simulates the game.</p>
+
+
+<h3 id="rules">Rules</h3>
+
+<p>The rules are essentially the same as Conway's original game. The definition
+of a &quot;neighbouring cell&quot; is changed: all those cells that are at a distance
+of 4 or less from a given cell are <em>neighbours</em> to that cell:
+<pre>
+          _____cell in question
+          |
+   ...xxxxXxxxx...
+      \|/  \|/
+       |____|____its eight neighbours
+</pre>
+After this definition is given, it remains to decide the rules of being born and
+dying. Let <em>n</em> be the number of alive neighbours for a given cell. In
+Conways original game the rules are:
+<ul>
+<li>if the cell is alive and <em>n</em>&lt;2 or <em>n</em>&gt;3, the cell dies;</li>
+<li>if the cell is dead and <em>n</em>=3, the cell becomes alive;</li>
+<li>otherwise no change in this cell.</li>
+</ul></p>
+
+<p>Other rulesets might prove more interesting for Linelife. Conway's ruleset
+can also be called the S23-B3 ruleset, for cells with 2 or 3 neighbours
+'S'urvive, whereas a 'B'irth requires exactly 3 neighbours. A potentially more
+interesting ruleset for Linelife is S34-B3.</p>
+
+<p>See below for a more detailed comparison of these rulesets.</p>
+
+
+<h3 id="program">The <em>linelife</em> program</h3>
+
+<p><em>linelife</em> can be used to automatize and visualize Linelife in
+practice. The program is written in C++ and uses Curses for the interface. It
+<em>should</em> work in any UNIX-line system. The provided Makefile contains rules
+for compiling a normal version or a minimal program without the Curses
+interface. The Makefile also defines the used ruleset, by default it is S34-B3.
+Please see the provided man page for further information about
+using the program.</p>
+
+<p>Limitations worth knowing about: Due to the way the data is stored
+internally, the line has a maximum length, usually 2<sup>64</sup> or
+2<sup>32</sup> depending on your machine. Some buggy behaviour is likely if your
+pattern is at either end of the line (due to integers wrapping around).
+There is no undo function at the moment,
+except that you can achieve an undo by hitting 'bm', but this only works if you
+have ran at least one generation prior to doing any editing, and it undos
+everything done after running a step.</p>
+
+
+<h3 id="trivia">Trivia</h3>
+<p>With the classical Conway rules, S23-B3, Linelife features a large variety of
+static patterns. No short pattern (patterns up to length 34 have been
+exhaustively tested) shows variety beyond 26 generations. There are some
+repeating patterns (with periods 2, 3, and 6), but no moving patterns (such as
+the &quot;glider&quot; in Conway's game).</p>
+
+<p>With the ruleset S34-B3, there is a rather simple moving pattern, which has
+been named &quot;a crawler&quot;. It has 8 states, the simplest of which is
+<pre>
+1011011
+</pre>
+In 8 generations this pattern moves, going through various changes, 15 steps to the right.
+A vast amount of repeating patterns with period 2 exist, but there are no genuinely static
+patterns (many of the patterns that are periodic with period 2 are mostly static
+and only change at the ends). Other interesting patterns also exists, such as a
+repeating pattern with period 40:
+<pre>
+1001101001011011
+</pre>
+This ruleset seems much more fascinating, at least from the perspective that
+even very simple (short) patterns should produce interesting evolutions.</p>
+
+</body>
+</html>

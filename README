@@ -1,0 +1,42 @@
+Please read the file 'linelife.html' for a general introduction to Linelife,
+and the provided man page for information on using the linelife program.
+
+This package contains the following files:
+linelife.html  -- general introduction to Linelife
+linel.1        -- man page for linelife
+linel.cpp      -- source code for the linelife program
+llvisual.c     -- source code for the llvis program; see below
+Makefile       -- makefile for building linel&llvis
+llgen.c        -- program for exhaustive sequence testing
+ll2num.sh
+llanimate.sh   -- shell scripts for manipulating Lifeline sequences; see below
+crawler.gif    -- an animation of a "crawler"
+
+
+ll2num.sh is a script to interpret a Linelife pattern (a string consisting of
+'0's and '1's) as a binary number which is then output in decimal and
+hexadecimal. Please take a look at the script for more information.
+
+
+llanimate.sh is a script to generate animations from linelife runs. It uses
+the llvis program, described below, to generate the frames.
+
+
+llvis reads a Linelife pattern from stdin and generates a png image based on it;
+usually something resembling a barcode. The general invocation is
+	llvis file.png -s 1 -h 50
+where "file.png" is the output file, -h gives the height of the image to produce
+(all rows in the image will be equal!), and -s gives the stepsize: how many
+cells ('0's and '1's) to compress into a single pixel column. This is done by
+taking an average "aliveness", so that if, for instance, the stepsize is 3, a
+sequence "111" produces white, "000" produces black, and anything else produces
+a gray of varying degree.
+The produced images are 8 bpp grayscale.
+
+Typically you would do something like
+	echo 00101001010011100 | llvis mypic.png
+or
+	llvis myotherpic.png -s 4 < mystoredsequence
+
+The Makefile will compile llvis, as well. You need to have libpng installed.
+

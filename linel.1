@@ -1,0 +1,155 @@
+.TH LINELIFE 1
+.SH NAME
+linelife \- a simple CLI program for playing the Lifeline game
+.SH SYNOPSIS
+.B linelife
+.RB [ \-n " <number of generations>"]
+.RB [ "intial pattern in 0s and 1s"]
+.RB [ \-s ]
+.RB [ \-b " <filename>"]
+.SH DESCRIPTION
+.B linelife
+can be run either in automatic or interactive mode.
+.P
+In automatic mode, linelife simply iterates a pattern for as many
+generations as specified by the integer argument, or until a static state is
+reached. To start this mode, you must give the argument '-n' followed by the
+maximum number of generations to run. If lifeline was compiled without Curses
+support, this is the only way to run the program.
+.P
+Passing the argument '-s' tells lifeline to print each generation as they are
+processed. Otherwise only the final state is printed. The argument '-s' has no
+effect in interactive mode.
+.P
+There are three ways to give the initial pattern (a string consisting of the
+symbols '0' (living cell) and '1' (dead cell)): (1) as a command line
+argument; (2) in a file, then name of which is given after the '-b' argument;
+and, if neither argument is given, (3) the pattern is read from stdin. The last
+alternative obviously is not available in interactive mode.
+.P
+With the '-b' argument you can do a batch run; if the file contains more than
+one pattern (separated by newlines), they will all be processed.
+.P
+In the interactive mode, an "infinite" line of cells is drawn on the screen, and
+you can manipulate it in various ways.
+.SH COMMANDS
+The following keys are available in the interactive mode:
+.P
+Movement keys, always usable:
+.TP
+.B h/left
+scroll left
+.TP
+.B l/right
+scroll right
+.TP
+.B k/up
+increase scroll step (up to 100000)
+.TP
+.B j/down
+decrease scroll step (down to 1, which it is initially)
+.P
+Playback commands (to automatically run the cell simulation):
+.TP
+.B >
+increase playback speed (max: 1 step per 200ms)
+.TP
+.B <
+decrease playback speed (min and initial: 1 step per second; the incr/decr step is 200ms)
+.TP
+.B .
+stop playback (set speed to 0)
+.TP
+.B ,
+toggle pause (remembers speed)
+.P
+.B Selection mode
+is entered by pressing
+.B v
+\, This will automatically stop playback. In selection mode you select an
+interval of the cells instead of just moving the cursor. In addition to the
+movement keys:
+.TP
+.B tab/esc
+exit selection mode
+.TP
+.B	1/0
+set all cells in the selection alive/dead
+.TP
+.B y
+yank (copy) the selection
+.TP
+.B d
+delete the selection and put it in the copy buffer
+.P
+The following keys are available when not in selection mode, and using them will
+automatically stop any playback:
+.TP
+.B n
+print current population (number of alive cells), length of pattern (number of
+cells from leftmost to rightmost living cell), density (population / length),
+and shift of the leftmost alive cell with respect to the initial pattern
+.TP
+.B g
+print current generation number (note that this is not reset if manual
+modifications to the population are made)
+.TP
+.B G
+go to generation (enter number after hitting 'G'); can be used to go back
+in history or to fast-forward to the future
+.TP
+.B m/b
+run one step forward/back
+.TP
+.B x
+exchange the cell under the cursor with its neighbour in the typing direction
+.TP
+.B 1/0
+set cell under cursor alive/dead and move cursor in	current typing direction
+.TP
+.B T
+toggle typing direction left/right (initially right)
+.TP
+.B p
+paste selection, inserting
+.TP
+.B P
+paste selection, overwriting (note that 'P' starts at the cursor position,
+but 'p' inserts after the cursor like in vi; note also that the pastings happen
+in the typing direction)
+.TP
+.B space
+toggle cell under cursor alive/dead (does not move cursor)
+.TP
+.B S
+save current situation into a text file (the name of which you will be asked).
+What exactly is saved is a string of 0s and 1s from the leftmost living cell to
+the rightmost.
+.TP
+.B O
+load a situation from a text file (replaces whatever is currently shown and clears history)
+.TP
+.B E
+erase history, set generation number to 0
+.TP
+.B :
+after which you enter a shell command; this will save into a temporary file '/tmp/ll',
+run your command, and load '/tmp/ll' again
+.P
+The following keys are again usable always, and they do not stop playback:
+.TP
+.B r
+resets the view (puts the cursor at the middle point between the leftmost and
+rightmost living cells)
+.TP
+.B s
+show current selection (the content of the copy buffer)
+.TP
+.B t
+print cursor position (a program internal; useful for debugging)
+.TP
+.B q
+quits the program
+.SH FILES
+.B /tmp/ll
+is the file used for temporary manipulations by external programs.
