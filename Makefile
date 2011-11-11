@@ -28,10 +28,10 @@ LIBPNG=-lpng
 all: normal llvis
 
 normal:
-	$(GXX) -o linel linell.cpp -DDIERULE=$(DIERULE) -DBIRTHRULE=$(BIRTHRULE) $(FLAGS) $(LIBCURSES)
+	$(GXX) -o linel linel.cpp -DDIERULE=$(DIERULE) -DBIRTHRULE=$(BIRTHRULE) $(FLAGS) $(LIBCURSES)
 
 noninteractive:
-	$(GXX) -o linel linell.cpp -DDIERULE=$(DIERULE) -DBIRTHRULE=$(BIRTHRULE) $(FLAGS) -DNO_INTERFACE
+	$(GXX) -o linel linel.cpp -DDIERULE=$(DIERULE) -DBIRTHRULE=$(BIRTHRULE) $(FLAGS) -DNO_INTERFACE
 
 llvis:
 	$(GCC) -o llvis llvisual.c $(FLAGS) $(LIBPNG)

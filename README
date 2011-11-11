@@ -9,6 +9,7 @@ llvisual.c     -- source code for the llvis program; see below
 Makefile       -- makefile for building linel&llvis
 llgen.c        -- program for exhaustive sequence testing
 ll2num.sh
+lldetectper.sh
 llanimate.sh   -- shell scripts for manipulating Lifeline sequences; see below
 crawler.gif    -- an animation of a "crawler"
 
@@ -16,6 +17,10 @@ crawler.gif    -- an animation of a "crawler"
 ll2num.sh is a script to interpret a Linelife pattern (a string consisting of
 '0's and '1's) as a binary number which is then output in decimal and
 hexadecimal. Please take a look at the script for more information.
+
+
+lldetectper.sh is used to detect periodicity of lifeline patterns (as in,
+generation N is always the same as generation N+M for some M>1).
 
 
 llanimate.sh is a script to generate animations from linelife runs. It uses
