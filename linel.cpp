@@ -1,3 +1,4 @@
+// See linelife.html and/or linelife.1
 #include <string>
 #include <cstring>
 #include <cstdlib>
@@ -334,7 +335,8 @@ int main(int argc, char* argv[])
 #ifdef NO_INTERFACE
 				" (no-interface build)" <<
 #endif
-				endl << "Please see the linelife.html file for information." << endl;
+				endl << "Please see the linelife.html file and the man page for information."
+					<< endl;
 			return 0;
 		}
 		else if(!strcmp(argv[j], "-s"))

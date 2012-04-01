@@ -16,6 +16,7 @@ int main(int argc, char *argv[])
 {
 	int len, i, old_i, wgt;
 	char *seq;
+	unsigned long num = 0, printed = 0;
 
 	/* length 1024 would be absolutely ridiculous, but having a ridiculous
  	 * upper bound is better than no bound */
@@ -27,7 +28,7 @@ int main(int argc, char *argv[])
 
 	seq = malloc(len+1);
 	seq[len] = '\0';
-	/* if the pattern is of length len, the endpoints much be alive: */
+	/* if the pattern is of length len, the endpoints must be alive: */
 	seq[0] = seq[len-1] = '1';
 	for(i = 1; i < len-1; ++i)
 		seq[i] = '0';
@@ -53,7 +54,7 @@ int main(int argc, char *argv[])
 		{
 			seq[(old_i = i)] = '0';
 			wgt -= i/* - len/2*/ + (i>=(len/2))*(!(len%2));
-			/* (len/2 gets reducted below, so no need to add it here) */
+			/* (len/2 gets deducted below, so no need to add it here) */
 			while(++i < len-1 && seq[i] == '1')
 			{
 				seq[i] = '0';
@@ -68,9 +69,16 @@ int main(int argc, char *argv[])
 
 		/*printf("%s (%i)\n", seq, wgt);*/
 		if(wgt >= 0)
+		{
 			puts(seq);
+			++printed;
+		}
 		/* else the pattern is left-weighted and has a reverse that is
 		 * right-weighted, so lets not print both. */
+
+		/* Print progress information when generating a lot of data */
+		if(!((++num)%20736))
+			fprintf(stderr, "%u done (%u printed)\n", num, printed);
 	}
 	free(seq);
 	return 0;
