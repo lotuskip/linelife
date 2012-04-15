@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Script to make an animation from the step-wise output of linelife. The 
 # patterns are taken from stdin (and they should be in the format linelife
 # produces).

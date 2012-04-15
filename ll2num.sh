@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/dash
 # This script reads a Linelife sequence of 1:s and 0:s, interprets that as a
 # binary number, and outputs it both in decimal and hexadecimal (unsigned).
 # This can be useful for representing long patterns in a more condensed form.

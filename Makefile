@@ -7,7 +7,10 @@
 #the cell in question has.
 # Default for Linelife:
 DIERULE="n < 3 || n > 4"
-BIRTHRULE="n == 3"
+BIRTHRULE="n == 2"
+# Default for Linelife:
+#DIERULE="n < 3 || n > 4"
+#BIRTHRULE="n == 3"
 # Conway's classic rules:
 #DIERULE="n < 2 || n > 3"
 #BIRTHRULE="n == 3"

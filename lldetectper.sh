@@ -22,7 +22,8 @@ else
 # Running for N generations generates N+1 lines of output. Sort the produced
 # patterns, remove duplicates, and if what is left is N lines, the pattern is
 # likely periodic with period N (or: it happens to go extinct just at generation
-# N, so that the run actually only generates N lines to begin with).
+# N, so that the run actually only generates N lines to begin with, or: it is M
+# steps away from becoming periodic with period N-M).
 		if test $(./linel $s -n $n -s | cut -f 7 -d ' ' | sort | uniq | wc -l) -eq $n
 			then
 			echo "discarded $s" >&2

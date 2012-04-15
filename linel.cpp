@@ -13,7 +13,7 @@
 #endif
 using namespace std;
 
-const int VERSION = 2;
+const int VERSION = 3;
 
 #define ALIVE '1'
 #define DEAD '0'
@@ -329,12 +329,16 @@ int main(int argc, char* argv[])
 	string s;
 	for(j = 1; j < argc; ++j)
 	{
-		if(!strcmp(argv[j], "-h"))
+		if(!strcmp(argv[j], "-h") || !strcmp(argv[j], "-v"))
 		{
 			cout << "Linelife " << VERSION <<
 #ifdef NO_INTERFACE
 				" (no-interface build)" <<
 #endif
+#define STR_EXPAND(tok) #tok
+#define STR(tok) STR_EXPAND(tok)
+				endl << "with dierule \"" STR(DIERULE) "\" and birthrule \""
+				STR(BIRTHRULE) "\"" <<
 				endl << "Please see the linelife.html file and the man page for information."
 					<< endl;
 			return 0;

@@ -82,7 +82,7 @@ int main(int argc, char* argv[])
 		if(ch == '1')
 			f += 1.0f/scaling;
 		else if(ch != '0')
-			fputs("Warning: unknown characters read!\n", stderr);
+			fprintf(stderr, "Warning: unknown character '%c' read!\n", ch);
 		
 		if(++i == scaling)
 		{
