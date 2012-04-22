@@ -15,6 +15,11 @@
 # with decimal. If '-d' and '-x' are both present, both are printed without
 # labeling (decimal first, then hex).
 #
+if ! which bc > /dev/null 2> /dev/null
+	then
+		echo "bc is required for this script to work."
+	exit
+fi
 #parse arguments:
 dodec=0
 dohex=0

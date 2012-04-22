@@ -11,6 +11,22 @@
 # Requirements: llvis to make the pictures, imagemagick (convert) to convert
 # png->gif, gifsicle to create the animation, awk, head, and some other
 # standard utils.
+if ! which convert > /dev/null 2> /dev/null
+	then
+		echo "imagemagick (convert) is required for this script to work."
+	exit
+fi
+if ! which gifsicle > /dev/null 2> /dev/null
+	then
+		echo "gifsicle is required for this script to work."
+	exit
+fi
+if ! which llvis > /dev/null 2> /dev/null
+	then
+		echo "llvis must be in your PATH for this script to work."
+	exit
+fi
+
 if test $# -lt 1; then
 	echo "missing delay argument"
 elif test $1 -lt 1; then
@@ -36,7 +52,7 @@ else
 	exec < lla_tmp2
 	n=1
 	while read p; do
-		echo $p | ./llvis frame$(printf "%05d" "$n").png $* > /dev/null
+		echo $p | llvis frame$(printf "%05d" "$n").png $* > /dev/null
 		n=$((n+1))
 	done
 
