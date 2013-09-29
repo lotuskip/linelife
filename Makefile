@@ -4,10 +4,10 @@
 # "make noninteractive" to build linelife without Curses interface
 
 #The rule set can be changed here. 'n' is the number of alive neighbours
-#the cell in question has.
-# Default for Linelife:
+#the cell in question has. The rules are substituted into an if-statement in
+#C++ code ("if(DIERULE)" and "if(BIRTHRULE)").
 DIERULE="n < 3 || n > 4"
-BIRTHRULE="n == 2"
+BIRTHRULE="n == 3"
 # Default for Linelife:
 #DIERULE="n < 3 || n > 4"
 #BIRTHRULE="n == 3"
@@ -19,11 +19,11 @@ BIRTHRULE="n == 2"
 #BIRTHRULE="n == 3 || n == 6"
 
 #Modify these if necessary:
-GCC=gcc
-GXX=g++
+GCC=clang
+GXX=clang++
 RM=rm -f
-FLAGS=-O2 -Wall
-#FLAGS=-O0 -ggdb
+FLAGS=-O2
+#FLAGS=-O0 -ggdb -Wall -Wextra
 LIBCURSES=-lncurses
 LIBPNG=-lpng
 ##########################################################################

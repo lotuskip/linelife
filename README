@@ -10,8 +10,12 @@ Makefile       -- makefile for building linel&llvis
 llgen.c        -- program for exhaustive sequence testing
 ll2num.sh
 lldetectper.sh
+llpicture.sh
 llanimate.sh   -- shell scripts for manipulating Lifeline sequences; see below
 crawler.gif    -- an animation of a "crawler"
+period40.gif
+period40.pbm   -- an animation and a static picture of a periodic pattern with
+                  period 40
 
 
 ll2num.sh is a script to interpret a Linelife pattern (a string consisting of
@@ -21,6 +25,10 @@ hexadecimal. Please take a look at the script for more information.
 
 lldetectper.sh is used to detect periodicity of lifeline patterns (as in,
 generation N is always the same as generation N+M for some M>1).
+
+
+llpicture.sh generates a 2-D picture from a lifeline run, where the other
+dimension is time.
 
 
 llanimate.sh is a script to generate animations from linelife runs. It uses

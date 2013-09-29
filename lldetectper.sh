@@ -6,14 +6,15 @@
 # give some false positives on occasion, but should correctly detect
 # periodicity always. Note that for instance a periodic pattern with period 3
 # will NOT be detected as periodic with period 6 (which, admittedly, IS wrong).
-# The searched period should be the smallest possible to be detected.
+# The searched period should be the smallest possible (the base period) in order
+# to be detected.
 #
 # Note also that, as the shift is not taken into account at all, moving
-# patterns are considered periodic.
+# patterns are reported as periodic.
 #
 # As it is, the script prints the NON-periodic patterns to stdout and
 # "discards" the periodic ones (they are printed to stderr, though). This
-# should be easy to change, though.
+# should be easy to change.
 if test $# -lt 1; then
 	echo "No periodicity given" >&2
 else

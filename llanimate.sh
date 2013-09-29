@@ -48,7 +48,7 @@ else
 	awk "{for(i = \$1; i >= $minshift; --i) printf \"0\"; printf \"%s\", \$2;\
 		for(i = \$1+length(\$2); i <= $maxright; ++i) printf \"0\";\
 		print \"\"}" FS=" " lla_tmp > lla_tmp2
-# Pass each generate line to llvis:
+# Pass each generated line to llvis:
 	exec < lla_tmp2
 	n=1
 	while read p; do

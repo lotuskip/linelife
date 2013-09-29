@@ -219,7 +219,7 @@ bool step(const bool dohistory = true)
 		history.push_back(alives);
 #endif
 
-	char n = 1; // first position to check has a single living neighbour
+	char n = 1; // first position to check has itself as a living neighbour
 	bool equal = true; // has the step made a change?
 	/* NOTE: with the standard rules, we could optimise a little here, but this
 	 * algorithm will work correctly with any ruleset given in the Makefile */
