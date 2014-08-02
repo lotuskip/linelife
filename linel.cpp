@@ -764,8 +764,7 @@ int main(int argc, char* argv[])
 				{
 					if(!(--playback))
 						stop_playback();
-					else
-						print_info("Playback at %i", int(playback));
+					print_info("Playback at %i", int(playback));
 				}
 				break;
 			case '.': // stop playback
@@ -798,11 +797,13 @@ int main(int argc, char* argv[])
 					}
 					print_to(file);
 					file.close();
-					system(s.c_str());
-					file.open(tmp_file_name, ios_base::in);
-					getline(file, s);
-					init_from_string(s);
-					print_entire_line();
+					if(!WEXITSTATUS((j = system(s.c_str()))))
+					{
+						file.open(tmp_file_name, ios_base::in);
+						getline(file, s);
+						init_from_string(s);
+						print_entire_line();
+					}
 				}
 				break;
 			} // switch input

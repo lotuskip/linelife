@@ -48,7 +48,7 @@ int main(int argc, char *argv[])
  			 * "(i>=(len/2))*(!(len%2))" is just 0 or 1.
  			 * It is 1 when 'len' is even and i >= len/2,
  			 * 0 otherwise. So this is a fix on the right
- 			 * hand side weighs for even-length patterns. */
+ 			 * hand side weights for even-length patterns. */
 		}
 		else
 		{

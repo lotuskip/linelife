@@ -1,4 +1,4 @@
-#!/bin/dash
+#!/bin/sh
 # A script to detect periodicity in Linelife patterns, which are read from
 # stdin. The only and mandatory argument is the periodicity to look for,
 # eg. 2. Each pattern is run with linel for that many generations, and a
