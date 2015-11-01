@@ -34,22 +34,24 @@ elif test $1 -lt 1; then
 else
 	delay=$1
 	shift
+	t=$(tempfile) || exit
 #Store everything except "summary line", remove all but patterns and shifts:
-	head -n -1 | sed 's/^.* shift //' | sed 's/)://' > lla_tmp
+	head -n -1 | sed 's/^.* shift //' | sed 's/)://' > $t
 #Find minimum shift value (giving the position of the left edge):
-	minshift=$(awk 'm=="" || $1 < m {m=$1} END{print m}' FS=" " lla_tmp)
+	minshift=$(awk 'm=="" || $1 < m {m=$1} END{print m}' FS=" " $t)
 #Find maximum [shift]+[length] value (giving right edge position):
 	maxright=$(awk 'm=="" || $1+length($2) > m {m=$1+length($2)}\
-		END{print m}' FS=" " lla_tmp)
+		END{print m}' FS=" " $t)
 
 # Now we add the required amount of '0's to each line and pass them to llvis.
 # Note that we *intentionally* add one extra '0' to both ends! If you don't
 # want this, then just change the ">=" and "<=" to ">" and "<".
+	t2=$(tempfile) || exit
 	awk "{for(i = \$1; i >= $minshift; --i) printf \"0\"; printf \"%s\", \$2;\
 		for(i = \$1+length(\$2); i <= $maxright; ++i) printf \"0\";\
-		print \"\"}" FS=" " lla_tmp > lla_tmp2
+		print \"\"}" FS=" " $t > $t2
 # Pass each generated line to llvis:
-	exec < lla_tmp2
+	exec < "$t2"
 	n=1
 	while read p; do
 		echo $p | llvis frame$(printf "%05d" "$n").png $* > /dev/null
@@ -64,5 +66,5 @@ else
 	gifsicle -l -d $delay frame*.png.gif > animation.gif
 
 # Remove temporary files:
-	rm -f lla_tmp lla_tmp2 frame*.png frame*.png.gif
+	rm -f -- $t $t2 frame*.png frame*.png.gif
 fi
