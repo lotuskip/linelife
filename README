@@ -1,4 +1,4 @@
-Please read the file 'linelife.html' for a general introduction to Linelife,
+Please view the file 'linelife.html' for a general introduction to Linelife,
 and the provided man page for information on using the linelife program.
 
 This package contains the following files:
@@ -8,14 +8,14 @@ linel.cpp      -- source code for the linelife program
 llvisual.c     -- source code for the llvis program; see below
 Makefile       -- makefile for building linel&llvis
 llgen.c        -- program for exhaustive sequence testing
-ll2num.sh
-lldetectper.sh
-llpicture.sh
-llanimate.sh   -- shell scripts for manipulating Lifeline sequences; see below
+ll2num.sh    \
+lldetectper.sh\-- shell scripts for manipulating Lifeline sequences; see below
+llpicture.sh  /
+llanimate.sh /
 crawler.gif    -- an animation of a "crawler"
-period40.gif
-period40.pbm   -- an animation and a static picture of a periodic pattern with
-                  period 40
+period40.gif  \-- an animation & picture of a periodic pattern with period 40
+period40.pbm  /
+                  
 
 
 ll2num.sh is a script to interpret a Linelife pattern (a string consisting of
@@ -46,7 +46,7 @@ sequence "111" produces white, "000" produces black, and anything else produces
 a gray of varying degree.
 The produced images are 8 bpp grayscale.
 
-Typically you would do something like
+Typically one would do something like
 	echo 00101001010011100 | llvis mypic.png
 or
 	llvis myotherpic.png -s 4 < mystoredsequence
